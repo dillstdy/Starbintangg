@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fff7cf">
+  <meta name="description" content="StarBintang — tempat menyimpan dan berbagi kenangan foto dan video.">
+  <title>StarBintang — Galeri Kenangan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow glow-yellow"></div><div class="glow glow-blue"></div><div class="glow glow-red"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="StarBintang beranda">
+      <span class="brand-star" aria-hidden="true">★</span><span>Star<span>Bintang</span></span>
+    </a>
+    <nav><a href="#galeri">Galeri</a><a href="#tentang">Tentang</a></nav>
+    <button class="btn btn-dark" id="openUploadTop">＋ Tambah kenangan</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> TEMPAT KENANGAN KITA</div>
+        <h1>Setiap momen punya <span class="gradient-text">ceritanya.</span></h1>
+        <p class="hero-desc">Simpan foto, video, dan cerita berharga dalam satu galeri. Kenangan kecil hari ini bisa jadi cerita indah nanti.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#galeri">Lihat galeri <span>↘</span></a>
+          <button class="btn btn-light" id="openUploadHero">＋ Unggah foto/video</button>
+        </div>
+        <div class="hero-note"><span class="tiny-stars">✦ ✧ ✦</span> Dibuat untuk kenangan yang tidak terlupakan</div>
+      </div>
+      <div class="hero-art" aria-label="Ilustrasi gradasi dekoratif">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="art-card art-card-back"><span>✦</span></div>
+        <div class="art-card art-card-front">
+          <div class="art-sun"></div><div class="art-hill hill-one"></div><div class="art-hill hill-two"></div>
+          <div class="art-caption">little moments<br><strong>forever memories</strong></div>
+          <span class="art-spark spark-one">✦</span><span class="art-spark spark-two">✧</span>
+        </div>
+        <div class="floating-tag tag-yellow">☀️ hari indah</div><div class="floating-tag tag-blue">♡ selamanya</div>
+      </div>
+    </section>
+
+    <section class="stats-row" aria-label="Ringkasan galeri">
+      <div><strong id="memoryCount">0</strong><span>Kenangan</span></div>
+      <div><strong id="photoCount">0</strong><span>Foto</span></div>
+      <div><strong id="videoCount">0</strong><span>Video</span></div>
+      <div class="stats-message">Kumpulan momen, cerita, dan tawa. <span>✦</span></div>
+    </section>
+
+    <section class="gallery-section" id="galeri">
+      <div class="section-heading">
+        <div><div class="eyebrow"><span class="eyebrow-dot"></span> MEMORY LANE</div><h2>Galeri <span class="gradient-text">kenangan</span></h2><p>Tekan foto untuk melihat lebih besar, atau unduh untuk disimpan.</p></div>
+        <div class="filters" role="group" aria-label="Filter galeri">
+          <button class="filter active" data-filter="all">Semua</button><button class="filter" data-filter="photo">Foto</button><button class="filter" data-filter="video">Video</button>
+        </div>
+      </div>
+      <div id="gallery" class="gallery-grid">
+        <div class="empty-state"><div class="empty-icon">✧</div><h3>Galeri siap diisi!</h3><p>Tambahkan foto atau video pertama untuk mulai menyimpan kenangan.</p><button class="btn btn-dark" id="emptyUpload">＋ Tambah kenangan</button></div>
+      </div>
+      <p class="privacy-note" id="storageNotice"><span>ℹ</span> Mode demo: unggahan hanya tersimpan di browser ini. Hubungkan Supabase agar semua orang dapat melihat galeri dan unggahan tersimpan online.</p>
+    </section>
+
+    <section class="memory-banner" id="tentang">
+      <div class="banner-spark">✦</div><div><div class="eyebrow">UNTUK MOMEN BERHARGA</div><h2>Kenangan boleh berlalu,<br><span>tapi cerita tetap maju. ADIOSSS</span></h2><p>Terus tambahkan momen favoritmu ke StarBintang.</p></div>
+      <button class="btn btn-white" id="openUploadBanner">Tambah kenangan <span>↗</span></button>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-star" aria-hidden="true">★</span><span>Star<span>Bintang</span></span></a><span>Dibuat dengan ♥ untuk menyimpan kenangan.</span><span>© <span id="year"></span> StarBintang</span></footer>
+
+  <dialog id="uploadDialog" class="dialog">
+    <form id="uploadForm" class="dialog-card">
+      <button type="button" class="close-dialog" id="closeUpload" aria-label="Tutup">×</button>
+      <div class="eyebrow"><span class="eyebrow-dot"></span> TAMBAH CERITA</div>
+      <h2>Masukkan kenangan baru</h2><p class="dialog-desc">Pilih foto atau video, lalu beri judul kecil jika mau.</p>
+      <label class="drop-zone" for="mediaFile"><span class="upload-symbol">↑</span><strong>Pilih foto atau video</strong><span>JPG, PNG, WEBP, MP4, WEBM · Maksimal sesuai konfigurasi penyimpanan</span><input id="mediaFile" type="file" accept="image/*,video/mp4,video/webm,video/ogg" required></label>
+      <label class="field-label" for="mediaTitle">Judul kenangan (opsional)</label><input id="mediaTitle" class="text-field" maxlength="100" placeholder="Contoh: Hari yang menyenangkan">
+      <label class="field-label" for="mediaDate">Tanggal (opsional)</label><input id="mediaDate" class="text-field" type="date">
+      <p id="uploadError" class="error-message" role="status"></p>
+      <button class="btn btn-dark submit-upload" type="submit" id="uploadSubmit">Unggah kenangan <span>↗</span></button>
+    </form>
+  </dialog>
+
+  <dialog id="viewerDialog" class="viewer-dialog">
+    <button type="button" class="viewer-close" id="closeViewer" aria-label="Tutup">×</button>
+    <div id="viewerMedia" class="viewer-media"></div>
+    <div class="viewer-bottom"><div><strong id="viewerTitle">Kenangan</strong><span id="viewerDate"></span></div><a class="btn btn-dark" id="downloadButton" href="#" download>↓ Download</a></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
